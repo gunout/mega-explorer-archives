@@ -369,12 +369,15 @@ body {
 .bar { width: 8px; background: var(--primary-cyan); animation: wave 1s infinite ease-in-out; }
 @keyframes wave { 0%, 100% { height: 10px; opacity: 0.5; } 50% { height: 60px; opacity: 1; box-shadow: 0 0 10px var(--primary-cyan); } }
 
+/* =========================================================
+   CONTRÔLES COMPACTS
+   ========================================================= */
 .media-controls {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 70%, transparent 100%);
-  padding: 30px 12px 10px 12px;
-  display: flex; flex-direction: column; gap: 8px;
+  padding: 20px 8px 6px 8px;
+  display: flex; flex-direction: column; gap: 4px;
   z-index: 30;
   opacity: 1;
   transform: translateY(0);
@@ -389,25 +392,25 @@ body {
 }
 
 .progress-container {
-  width: 100%; height: 5px;
+  width: 100%; height: 3px;
   background: rgba(0, 255, 255, 0.15);
-  border-radius: 3px; cursor: pointer; position: relative;
+  border-radius: 2px; cursor: pointer; position: relative;
   transition: height 0.15s ease;
 }
-.progress-container:hover { height: 7px; }
+.progress-container:hover { height: 5px; }
 .progress-buffered {
   position: absolute; top: 0; left: 0; height: 100%;
-  background: rgba(0, 255, 255, 0.25); border-radius: 3px; pointer-events: none;
+  background: rgba(0, 255, 255, 0.25); border-radius: 2px; pointer-events: none;
 }
 .progress-played {
   position: absolute; top: 0; left: 0; height: 100%;
-  background: var(--primary-cyan); border-radius: 3px;
+  background: var(--primary-cyan); border-radius: 2px;
   box-shadow: 0 0 8px var(--primary-cyan); pointer-events: none; width: 0%;
 }
 .progress-thumb {
   position: absolute; top: 50%; transform: translate(-50%, -50%);
-  width: 14px; height: 14px; background: var(--primary-cyan);
-  border-radius: 50%; box-shadow: 0 0 10px var(--primary-cyan);
+  width: 10px; height: 10px; background: var(--primary-cyan);
+  border-radius: 50%; box-shadow: 0 0 8px var(--primary-cyan);
   pointer-events: none; opacity: 0; transition: opacity 0.2s; left: 0%;
 }
 .progress-container:hover .progress-thumb { opacity: 1; }
@@ -416,19 +419,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 5px;
   color: var(--primary-cyan);
   font-family: 'Orbitron', monospace;
-  font-size: 11px;
+  font-size: 10px;
   flex-wrap: nowrap;
   width: 100%;
-  max-width: 620px;
+  max-width: 540px;
   margin: 0 auto;
-  padding: 0 4px;
+  padding: 0 2px;
 }
 
 .controls-spacer {
-  width: 12px;
+  width: 8px;
   flex-shrink: 0;
 }
 
@@ -437,14 +440,14 @@ body {
   border: 1px solid rgba(0, 255, 255, 0.3);
   color: var(--primary-cyan);
   cursor: pointer;
-  font-size: 14px;
-  padding: 6px 8px;
-  border-radius: 6px;
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 5px;
   transition: all 0.2s;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px; height: 34px;
+  width: 28px; height: 28px;
   text-decoration: none;
   flex-shrink: 0;
 }
@@ -486,10 +489,10 @@ body {
 }
 
 .time-display {
-  font-family: 'Orbitron', monospace; font-size: 11px;
-  color: var(--text-secondary); min-width: 90px;
-  letter-spacing: 0.5px; user-select: none;
-  padding: 0 4px;
+  font-family: 'Orbitron', monospace; font-size: 10px;
+  color: var(--text-secondary); min-width: 78px;
+  letter-spacing: 0.3px; user-select: none;
+  padding: 0 2px;
   text-align: center;
 }
 .time-display .current { color: var(--primary-cyan); }
@@ -498,20 +501,20 @@ body {
 .volume-wrapper {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 0 6px;
+  gap: 4px;
+  padding: 0 4px;
   background: rgba(0, 255, 255, 0.05);
   border: 1px solid rgba(0, 255, 255, 0.2);
-  border-radius: 8px;
-  height: 34px;
+  border-radius: 6px;
+  height: 28px;
   flex-shrink: 0;
 }
 
 .volume-slider {
-  width: 70px;
-  height: 5px;
+  width: 50px;
+  height: 4px;
   background: rgba(0, 255, 255, 0.2);
-  border-radius: 3px;
+  border-radius: 2px;
   outline: none;
   cursor: pointer;
   -webkit-appearance: none;
@@ -526,12 +529,12 @@ body {
 .volume-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 11px;
+  height: 11px;
   background: var(--primary-cyan);
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 8px var(--primary-cyan);
+  box-shadow: 0 0 6px var(--primary-cyan);
   transition: transform 0.15s;
 }
 
@@ -540,29 +543,29 @@ body {
 }
 
 .volume-slider::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+  width: 11px;
+  height: 11px;
   background: var(--primary-cyan);
   border-radius: 50%;
   cursor: pointer;
   border: none;
-  box-shadow: 0 0 8px var(--primary-cyan);
+  box-shadow: 0 0 6px var(--primary-cyan);
 }
 
 .volume-slider::-moz-range-track {
   background: rgba(0, 255, 255, 0.2);
-  height: 5px;
-  border-radius: 3px;
+  height: 4px;
+  border-radius: 2px;
 }
 
 .speed-btn {
-  font-family: 'Orbitron', monospace; font-size: 10px;
-  padding: 4px 8px; border: 1px solid rgba(0, 255, 255, 0.3);
+  font-family: 'Orbitron', monospace; font-size: 9px;
+  padding: 3px 6px; border: 1px solid rgba(0, 255, 255, 0.3);
   background: rgba(0, 255, 255, 0.08);
   color: var(--text-secondary);
-  border-radius: 6px; cursor: pointer;
-  transition: all 0.2s; min-width: 38px;
-  height: 34px;
+  border-radius: 5px; cursor: pointer;
+  transition: all 0.2s; min-width: 32px;
+  height: 28px;
 }
 .speed-btn:hover {
   border-color: var(--primary-cyan);
@@ -663,28 +666,29 @@ body {
   .controls-row {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 6px;
+    gap: 4px;
     max-width: 100%;
   }
   .volume-slider {
-    width: 50px;
+    width: 40px;
   }
   .ctrl-btn {
-    width: 30px;
-    height: 30px;
-    font-size: 12px;
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
   }
   .time-display {
-    font-size: 10px;
-    min-width: 75px;
+    font-size: 9px;
+    min-width: 70px;
   }
   .speed-btn {
-    height: 30px;
-    font-size: 9px;
-    padding: 4px 6px;
+    height: 26px;
+    font-size: 8px;
+    padding: 2px 5px;
+    min-width: 28px;
   }
   .volume-wrapper {
-    height: 30px;
+    height: 26px;
   }
 }
 </style>
@@ -973,7 +977,6 @@ let currentMediaItem = null;
    AJOUT À LA PLAYLIST (FILTRE MP3/OGG STRICT)
    ========================================================= */
 function addToPlaylist(url, name, type, path = '', size = 0) {
-  // === FILTRE STRICT : MP3 ou OGG uniquement ===
   const nameLower = (name || '').toLowerCase();
   const urlLower = (url || '').toLowerCase();
 
@@ -984,15 +987,13 @@ function addToPlaylist(url, name, type, path = '', size = 0) {
 
   if (!isMP3 && !isOGG) {
     console.log('[SKIP] Format non supporté:', name);
-    return; // Ignore tout ce qui n'est pas MP3/OGG
+    return;
   }
 
-  // Forcer le type à "audio"
   type = 'audio';
 
-  // Dédoublonnage par URL
   if (playlist.some(item => item.url === url)) {
-    return; // Déjà dans la playlist
+    return;
   }
 
   const uid = Date.now().toString(36) + Math.random().toString(36).slice(2);
@@ -1087,7 +1088,6 @@ function loadPlaylistFromStorage() {
   try {
     const saved = JSON.parse(localStorage.getItem('megaexplorer_playlist') || '[]');
     if (Array.isArray(saved) && saved.length) {
-      // Filtrer les anciens éléments qui ne seraient pas MP3/OGG
       playlist = saved.filter(i => {
         if (!i || !i.url || !i.name || !i.uid) return false;
         const nameLower = i.name.toLowerCase();
@@ -1102,7 +1102,7 @@ function loadPlaylistFromStorage() {
 }
 
 /* =========================================================
-   LECTEUR MEDIA + CONTRÔLES
+   LECTEUR MEDIA + CONTRÔLES COMPACTS
    ========================================================= */
 let currentMediaElement = null;
 
@@ -1174,7 +1174,6 @@ function attachMediaControls(mediaEl) {
     if (playlist.length > 1) playMedia((currentIndex + 1) % playlist.length);
   });
 
-  // SEEK
   const seekFromEvent = (e) => {
     if (!mediaEl.duration) return;
     const rect = progressContainer.getBoundingClientRect();
@@ -1190,7 +1189,6 @@ function attachMediaControls(mediaEl) {
   document.addEventListener('mouseup', () => { isDragging = false; });
   document.addEventListener('touchend', () => { isDragging = false; });
 
-  // BOUTONS
   ctrlPlay.onclick = () => {
     mediaEl.play().catch(() => {});
     updatePlayButtons();
@@ -1212,7 +1210,6 @@ function attachMediaControls(mediaEl) {
   $('ctrlBack10').onclick = () => { mediaEl.currentTime = Math.max(0, mediaEl.currentTime - 10); };
   $('ctrlForward10').onclick = () => { mediaEl.currentTime = Math.min(mediaEl.duration || 0, mediaEl.currentTime + 10); };
 
-  // VOLUME
   volumeSlider.oninput = (e) => {
     mediaEl.volume = parseFloat(e.target.value);
     if (mediaEl.volume > 0) mediaEl.muted = false;
@@ -1230,7 +1227,6 @@ function attachMediaControls(mediaEl) {
     volumeIcon.className = 'fas ' + icon;
   }
 
-  // VITESSE
   const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
   let speedIdx = 2;
   $('ctrlSpeed').onclick = () => {
@@ -1249,7 +1245,6 @@ function attachMediaControls(mediaEl) {
     });
   };
 
-  // AUTO-MASQUAGE
   const mediaControls = $('mediaControls');
   const screenContainer = $('screenContainer');
   let hideTimeout = null;
@@ -1292,14 +1287,11 @@ function playMedia(index) {
 
   const videoScreen = $('videoScreen');
   const audioScreen = $('audioScreen');
-  const videoContainer = $('videoPlayerContainer');
-  const videoPlaceholder = $('videoPlaceholder');
   const status = $('statusIndicator');
 
   const oldAudio = $('html5Audio');
   if (oldAudio) { oldAudio.pause(); oldAudio.src = ''; }
 
-  // Tous les fichiers sont audio (MP3/OGG)
   videoScreen.classList.remove('active');
   audioScreen.classList.add('active');
 
@@ -1347,13 +1339,10 @@ async function searchArchive(reset = true) {
     log('Recherche : "' + query + '" [type: ' + currentType + ']', 'info');
   }
 
-  // === FILTRE TYPE ===
   let typeFilter = '';
   if (currentType === 'audio') {
-    // Audio uniquement : items contenant du MP3 ou OGG
     typeFilter = ' AND mediatype:(audio) AND (format:"VBR MP3" OR format:"MP3" OR format:"Ogg Vorbis" OR format:"128Kbps MP3" OR format:"256Kbps MP3")';
   } else if (currentType === 'all') {
-    // Mode "Tout" : on garde tous les types, mais addToPlaylist filtrera à l'ajout
     typeFilter = '';
   } else {
     typeFilter = ' AND mediatype:(' + currentType + ')';
@@ -1472,7 +1461,6 @@ async function toggleFiles(itemEl, identifier) {
     const files = meta.files || [];
     list.innerHTML = '';
 
-    // === FILTRE MP3/OGG ===
     const filteredFiles = files.filter(f => {
       if (!f.name) return false;
       const fmt = (f.format || '').toLowerCase();
@@ -1539,7 +1527,6 @@ async function addAllFiles(identifier) {
     const meta = await res.json();
     const files = meta.files || [];
 
-    // === FILTRE MP3/OGG UNIQUEMENT ===
     const useful = files.filter(f => {
       if (!f.name) return false;
       const fmt = (f.format || '').toLowerCase();
@@ -1773,15 +1760,11 @@ document.addEventListener('keydown', (e) => {
 
 window.addEventListener('beforeunload', () => zipManager.destroy());
 
-/* =========================================================
-   INIT — DÉMARRAGE À VIDE
-   ========================================================= */
 window.addEventListener('DOMContentLoaded', () => {
   loadPlaylistFromStorage();
   updateGlobalCount();
   showNotification('MEGA EXPLORER ARCHIVES prêt.', 'success');
   log('Prêt. Tape un mot-clé et clique RECHERCHER.', 'info');
-  // ⚠️ Pas de recherche auto au démarrage
 });
 </script>
 </body>
