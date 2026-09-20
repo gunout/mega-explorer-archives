@@ -369,9 +369,6 @@ body {
 .bar { width: 8px; background: var(--primary-cyan); animation: wave 1s infinite ease-in-out; }
 @keyframes wave { 0%, 100% { height: 10px; opacity: 0.5; } 50% { height: 60px; opacity: 1; box-shadow: 0 0 10px var(--primary-cyan); } }
 
-/* =========================================================
-   CONTRÔLES CLASSIQUES + AUTO-MASQUAGE
-   ========================================================= */
 .media-controls {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -416,10 +413,23 @@ body {
 .progress-container:hover .progress-thumb { opacity: 1; }
 
 .controls-row {
-  display: flex; align-items: center; gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   color: var(--primary-cyan);
-  font-family: 'Orbitron', monospace; font-size: 11px;
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
   flex-wrap: nowrap;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 0 4px;
+}
+
+.controls-spacer {
+  width: 12px;
+  flex-shrink: 0;
 }
 
 .ctrl-btn {
@@ -445,11 +455,8 @@ body {
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
   transform: scale(1.05);
 }
-.ctrl-btn:active {
-  transform: scale(0.95);
-}
+.ctrl-btn:active { transform: scale(0.95); }
 
-/* Boutons Play / Pause / Stop */
 .play-btn { color: var(--success-green) !important; border-color: rgba(0, 255, 102, 0.4); }
 .play-btn:hover {
   background: rgba(0, 255, 102, 0.2) !important;
@@ -483,28 +490,70 @@ body {
   color: var(--text-secondary); min-width: 90px;
   letter-spacing: 0.5px; user-select: none;
   padding: 0 4px;
+  text-align: center;
 }
 .time-display .current { color: var(--primary-cyan); }
 .time-display .separator { opacity: 0.5; margin: 0 3px; }
 
-.volume-wrapper { display: flex; align-items: center; gap: 5px; position: relative; }
+.volume-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 6px;
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 8px;
+  height: 34px;
+  flex-shrink: 0;
+}
+
 .volume-slider {
-  width: 0; opacity: 0; transition: all 0.3s ease;
-  -webkit-appearance: none; appearance: none;
-  height: 4px; background: rgba(0, 255, 255, 0.2);
-  border-radius: 2px; outline: none; cursor: pointer;
+  width: 70px;
+  height: 5px;
+  background: rgba(0, 255, 255, 0.2);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: background 0.2s;
 }
+
+.volume-slider:hover {
+  background: rgba(0, 255, 255, 0.35);
+}
+
 .volume-slider::-webkit-slider-thumb {
-  -webkit-appearance: none; appearance: none;
-  width: 12px; height: 12px; background: var(--primary-cyan);
-  border-radius: 50%; cursor: pointer; box-shadow: 0 0 6px var(--primary-cyan);
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--primary-cyan);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--primary-cyan);
+  transition: transform 0.15s;
 }
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
 .volume-slider::-moz-range-thumb {
-  width: 12px; height: 12px; background: var(--primary-cyan);
-  border-radius: 50%; cursor: pointer; border: none;
-  box-shadow: 0 0 6px var(--primary-cyan);
+  width: 14px;
+  height: 14px;
+  background: var(--primary-cyan);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 8px var(--primary-cyan);
 }
-.volume-wrapper:hover .volume-slider { width: 80px; opacity: 1; }
+
+.volume-slider::-moz-range-track {
+  background: rgba(0, 255, 255, 0.2);
+  height: 5px;
+  border-radius: 3px;
+}
 
 .speed-btn {
   font-family: 'Orbitron', monospace; font-size: 10px;
@@ -520,8 +569,6 @@ body {
   color: var(--primary-cyan);
   background: rgba(0, 255, 255, 0.2);
 }
-
-.controls-spacer { flex: 1; }
 
 .download-current-btn { color: var(--success-green) !important; border-color: rgba(0, 255, 102, 0.4) !important; }
 .download-current-btn:hover {
@@ -612,7 +659,34 @@ body {
 .side-panel::-webkit-scrollbar { width: 8px; }
 .side-panel::-webkit-scrollbar-thumb { background: var(--dark-cyan); border-radius: 4px; }
 
-@media (max-width: 1100px) { .layout { grid-template-columns: 1fr; } }
+@media (max-width: 700px) {
+  .controls-row {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    max-width: 100%;
+  }
+  .volume-slider {
+    width: 50px;
+  }
+  .ctrl-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+  .time-display {
+    font-size: 10px;
+    min-width: 75px;
+  }
+  .speed-btn {
+    height: 30px;
+    font-size: 9px;
+    padding: 4px 6px;
+  }
+  .volume-wrapper {
+    height: 30px;
+  }
+}
 </style>
 </head>
 <body>
@@ -640,7 +714,6 @@ body {
       <div style="display:flex; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
         <input type="text" class="cyber-input" id="archiveInput"
                placeholder="🔍 Artiste, album, livre, film..."
-               value="dr dre"
                style="flex:1; min-width:200px;">
         <button class="cyber-btn" id="searchArchiveBtn">
           <i class="fas fa-search"></i> RECHERCHER
@@ -665,7 +738,7 @@ body {
       <div class="archive-results" id="archiveResults">
         <div style="text-align:center; color:var(--text-secondary); padding:30px; opacity:0.5;">
           <i class="fas fa-landmark" style="font-size:40px; margin-bottom:10px; display:block;"></i>
-          Recherche sur Archive.org...
+          Tape un mot-clé et clique RECHERCHER
         </div>
       </div>
 
@@ -714,7 +787,7 @@ body {
               <button class="ctrl-btn pause-btn" id="ctrlPause" title="Pause">
                 <i class="fas fa-pause"></i>
               </button>
-              <button class="ctrl-btn stop-btn" id="ctrlStop" title="Stop (retour au début)">
+              <button class="ctrl-btn stop-btn" id="ctrlStop" title="Stop">
                 <i class="fas fa-stop"></i>
               </button>
               <button class="ctrl-btn" id="ctrlBack10" title="Reculer 10s">
@@ -734,7 +807,7 @@ body {
                 <button class="ctrl-btn" id="ctrlMute" title="Muet">
                   <i class="fas fa-volume-high" id="volumeIcon"></i>
                 </button>
-                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1" title="Volume">
               </div>
 
               <button class="speed-btn" id="ctrlSpeed" title="Vitesse">1x</button>
@@ -896,7 +969,32 @@ let selectedUids = new Set();
 let currentIndex = -1;
 let currentMediaItem = null;
 
+/* =========================================================
+   AJOUT À LA PLAYLIST (FILTRE MP3/OGG STRICT)
+   ========================================================= */
 function addToPlaylist(url, name, type, path = '', size = 0) {
+  // === FILTRE STRICT : MP3 ou OGG uniquement ===
+  const nameLower = (name || '').toLowerCase();
+  const urlLower = (url || '').toLowerCase();
+
+  const isMP3 = nameLower.endsWith('.mp3') || urlLower.endsWith('.mp3') ||
+                nameLower.includes('.mp3') || urlLower.includes('.mp3');
+  const isOGG = nameLower.endsWith('.ogg') || urlLower.endsWith('.ogg') ||
+                nameLower.includes('.ogg') || urlLower.includes('.ogg');
+
+  if (!isMP3 && !isOGG) {
+    console.log('[SKIP] Format non supporté:', name);
+    return; // Ignore tout ce qui n'est pas MP3/OGG
+  }
+
+  // Forcer le type à "audio"
+  type = 'audio';
+
+  // Dédoublonnage par URL
+  if (playlist.some(item => item.url === url)) {
+    return; // Déjà dans la playlist
+  }
+
   const uid = Date.now().toString(36) + Math.random().toString(36).slice(2);
   playlist.push({ url, name, type, path, size, uid });
   renderPlaylist();
@@ -944,11 +1042,7 @@ function renderPlaylist() {
     const nameDiv = document.createElement('div');
     nameDiv.className = 'track-name';
     const iconEl = document.createElement('i');
-    if (item.type === 'video') iconEl.className = 'fas fa-film';
-    else if (item.type === 'audio') iconEl.className = 'fas fa-music';
-    else if (item.type === 'text') iconEl.className = 'fas fa-book';
-    else if (item.type === 'image') iconEl.className = 'fas fa-image';
-    else iconEl.className = 'fas fa-file';
+    iconEl.className = 'fas fa-music';
     nameDiv.appendChild(iconEl);
     nameDiv.appendChild(document.createTextNode(' ' + fixMojibake(item.name)));
     infoWrap.appendChild(nameDiv);
@@ -993,7 +1087,14 @@ function loadPlaylistFromStorage() {
   try {
     const saved = JSON.parse(localStorage.getItem('megaexplorer_playlist') || '[]');
     if (Array.isArray(saved) && saved.length) {
-      playlist = saved.filter(i => i && i.url && i.name && i.uid);
+      // Filtrer les anciens éléments qui ne seraient pas MP3/OGG
+      playlist = saved.filter(i => {
+        if (!i || !i.url || !i.name || !i.uid) return false;
+        const nameLower = i.name.toLowerCase();
+        const urlLower = i.url.toLowerCase();
+        return nameLower.includes('.mp3') || nameLower.includes('.ogg') ||
+               urlLower.includes('.mp3') || urlLower.includes('.ogg');
+      });
       renderPlaylist();
       updateGlobalCount();
     }
@@ -1001,7 +1102,7 @@ function loadPlaylistFromStorage() {
 }
 
 /* =========================================================
-   LECTEUR MEDIA + CONTRÔLES CLASSIQUES + AUTO-MASQUAGE
+   LECTEUR MEDIA + CONTRÔLES
    ========================================================= */
 let currentMediaElement = null;
 
@@ -1021,7 +1122,6 @@ function attachMediaControls(mediaEl) {
 
   let isDragging = false;
 
-  // Reset
   progressPlayed.style.width = '0%';
   progressThumb.style.left = '0%';
   timeCurrent.textContent = '0:00';
@@ -1090,7 +1190,7 @@ function attachMediaControls(mediaEl) {
   document.addEventListener('mouseup', () => { isDragging = false; });
   document.addEventListener('touchend', () => { isDragging = false; });
 
-  // BOUTONS PLAY / PAUSE / STOP
+  // BOUTONS
   ctrlPlay.onclick = () => {
     mediaEl.play().catch(() => {});
     updatePlayButtons();
@@ -1112,9 +1212,10 @@ function attachMediaControls(mediaEl) {
   $('ctrlBack10').onclick = () => { mediaEl.currentTime = Math.max(0, mediaEl.currentTime - 10); };
   $('ctrlForward10').onclick = () => { mediaEl.currentTime = Math.min(mediaEl.duration || 0, mediaEl.currentTime + 10); };
 
-  // Volume
+  // VOLUME
   volumeSlider.oninput = (e) => {
     mediaEl.volume = parseFloat(e.target.value);
+    if (mediaEl.volume > 0) mediaEl.muted = false;
     updateVolumeIcon();
   };
   $('ctrlMute').onclick = () => {
@@ -1129,7 +1230,7 @@ function attachMediaControls(mediaEl) {
     volumeIcon.className = 'fas ' + icon;
   }
 
-  // Vitesse
+  // VITESSE
   const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
   let speedIdx = 2;
   $('ctrlSpeed').onclick = () => {
@@ -1148,7 +1249,7 @@ function attachMediaControls(mediaEl) {
     });
   };
 
-  // ===== AUTO-MASQUAGE APRÈS 2 SECONDES =====
+  // AUTO-MASQUAGE
   const mediaControls = $('mediaControls');
   const screenContainer = $('screenContainer');
   let hideTimeout = null;
@@ -1198,43 +1299,28 @@ function playMedia(index) {
   const oldAudio = $('html5Audio');
   if (oldAudio) { oldAudio.pause(); oldAudio.src = ''; }
 
-  if (currentMediaItem.type === 'video') {
-    videoScreen.classList.add('active');
-    audioScreen.classList.remove('active');
-    videoPlaceholder.style.display = 'none';
-    videoContainer.innerHTML = '';
-    const video = document.createElement('video');
-    video.src = currentMediaItem.url;
-    video.controls = false;
-    video.autoplay = true;
-    video.playsInline = true;
-    video.preload = 'metadata';
-    videoContainer.appendChild(video);
-    status.textContent = '▶ PLAYING VIDEO';
-    attachMediaControls(video);
-  } else if (currentMediaItem.type === 'audio') {
-    videoScreen.classList.remove('active');
-    audioScreen.classList.add('active');
-    let audio = $('html5Audio');
-    if (!audio) {
-      audio = document.createElement('audio');
-      audio.id = 'html5Audio';
-      document.body.appendChild(audio);
-    }
-    audio.src = currentMediaItem.url;
-    audio.preload = 'metadata';
-    audio.play().catch(() => {});
-    $('audioTitle').textContent = fixMojibake(currentMediaItem.name);
-    $('audioPath').textContent = currentMediaItem.path ? fixMojibake(currentMediaItem.path) : '/';
-    status.textContent = '♪ PLAYING AUDIO';
-    attachMediaControls(audio);
-  } else {
-    window.open(currentMediaItem.url, '_blank');
-    status.textContent = '↗ OPENED EXTERNAL';
+  // Tous les fichiers sont audio (MP3/OGG)
+  videoScreen.classList.remove('active');
+  audioScreen.classList.add('active');
+
+  let audio = $('html5Audio');
+  if (!audio) {
+    audio = document.createElement('audio');
+    audio.id = 'html5Audio';
+    document.body.appendChild(audio);
   }
+  audio.src = currentMediaItem.url;
+  audio.preload = 'metadata';
+  audio.play().catch(() => {});
+  $('audioTitle').textContent = fixMojibake(currentMediaItem.name);
+  $('audioPath').textContent = currentMediaItem.path ? fixMojibake(currentMediaItem.path) : '/';
+  status.textContent = '♪ PLAYING AUDIO';
+  attachMediaControls(audio);
 }
 
-/* ARCHIVE.ORG SEARCH */
+/* =========================================================
+   ARCHIVE.ORG SEARCH
+   ========================================================= */
 let currentType = 'all';
 let currentQuery = '';
 let currentPage = 1;
@@ -1261,7 +1347,18 @@ async function searchArchive(reset = true) {
     log('Recherche : "' + query + '" [type: ' + currentType + ']', 'info');
   }
 
-  const typeFilter = currentType === 'all' ? '' : ' AND mediatype:(' + currentType + ')';
+  // === FILTRE TYPE ===
+  let typeFilter = '';
+  if (currentType === 'audio') {
+    // Audio uniquement : items contenant du MP3 ou OGG
+    typeFilter = ' AND mediatype:(audio) AND (format:"VBR MP3" OR format:"MP3" OR format:"Ogg Vorbis" OR format:"128Kbps MP3" OR format:"256Kbps MP3")';
+  } else if (currentType === 'all') {
+    // Mode "Tout" : on garde tous les types, mais addToPlaylist filtrera à l'ajout
+    typeFilter = '';
+  } else {
+    typeFilter = ' AND mediatype:(' + currentType + ')';
+  }
+
   const searchUrl = 'https://archive.org/advancedsearch.php?q=' +
     encodeURIComponent(query + typeFilter) +
     '&fl[]=identifier&fl[]=title&fl[]=mediatype&fl[]=creator&fl[]=year&fl[]=downloads&fl[]=item_size' +
@@ -1375,27 +1472,31 @@ async function toggleFiles(itemEl, identifier) {
     const files = meta.files || [];
     list.innerHTML = '';
 
-    if (files.length === 0) {
-      list.innerHTML = '<div style="color:var(--text-secondary); font-size:10px; padding:5px;">Aucun fichier</div>';
+    // === FILTRE MP3/OGG ===
+    const filteredFiles = files.filter(f => {
+      if (!f.name) return false;
+      const fmt = (f.format || '').toLowerCase();
+      const nameLower = f.name.toLowerCase();
+      return fmt.includes('mp3') || fmt.includes('ogg') ||
+             nameLower.endsWith('.mp3') || nameLower.endsWith('.ogg');
+    });
+
+    if (filteredFiles.length === 0) {
+      list.innerHTML = '<div style="color:var(--warning-orange); font-size:10px; padding:5px;">Aucun MP3 ou OGG dans cet item</div>';
+      list.dataset.loaded = '1';
       return;
     }
 
-    const priority = { 'MP3': 0, 'Ogg Vorbis': 1, 'Flac': 2, 'WAVE': 3, 'h.264': 10, 'MPEG4': 11, '512Kb MPEG4': 12, 'Item Tile': 90, 'Metadata': 99 };
-    files.sort((a, b) => (priority[a.format] ?? 50) - (priority[b.format] ?? 50));
+    const priority = { 'MP3': 0, 'VBR MP3': 0, '128Kbps MP3': 0, '256Kbps MP3': 0, 'Ogg Vorbis': 1 };
+    filteredFiles.sort((a, b) => (priority[a.format] ?? 50) - (priority[b.format] ?? 50));
 
-    files.forEach(f => {
-      if (!f.name) return;
+    filteredFiles.forEach(f => {
       const row = document.createElement('div');
       row.className = 'archive-file-row';
 
       const icon = document.createElement('i');
-      const fmt = (f.format || '').toLowerCase();
-      if (fmt.includes('mp3') || fmt.includes('ogg') || fmt.includes('flac') || fmt.includes('wave')) icon.className = 'fas fa-music';
-      else if (fmt.includes('mpeg') || fmt.includes('h.264') || fmt.includes('video')) icon.className = 'fas fa-film';
-      else if (fmt.includes('text') || fmt.includes('pdf') || fmt.includes('djv')) icon.className = 'fas fa-book';
-      else if (fmt.includes('image') || fmt.includes('jpeg') || fmt.includes('png')) icon.className = 'fas fa-image';
-      else icon.className = 'fas fa-file';
-      icon.style.color = 'var(--primary-cyan)';
+      icon.className = 'fas fa-music';
+      icon.style.color = 'var(--success-green)';
       icon.style.width = '14px';
 
       const name = document.createElement('div');
@@ -1413,8 +1514,7 @@ async function toggleFiles(itemEl, identifier) {
       add.title = 'Ajouter à la playlist';
       add.onclick = () => {
         const url = 'https://archive.org/download/' + encodeURIComponent(identifier) + '/' + f.name.split('/').map(encodeURIComponent).join('/');
-        const type = getFileType(fmt);
-        addToPlaylist(url, f.name, type, identifier, parseInt(f.size) || 0);
+        addToPlaylist(url, f.name, 'audio', identifier, parseInt(f.size) || 0);
         showNotification('✓ ' + f.name, 'success');
       };
 
@@ -1431,15 +1531,6 @@ async function toggleFiles(itemEl, identifier) {
   }
 }
 
-function getFileType(fmt) {
-  const f = (fmt || '').toLowerCase();
-  if (f.includes('mp3') || f.includes('ogg') || f.includes('flac') || f.includes('wave') || f.includes('audio')) return 'audio';
-  if (f.includes('mpeg') || f.includes('h.264') || f.includes('video') || f.includes('mp4')) return 'video';
-  if (f.includes('text') || f.includes('pdf') || f.includes('djv')) return 'text';
-  if (f.includes('image') || f.includes('jpeg') || f.includes('png')) return 'image';
-  return 'file';
-}
-
 async function addAllFiles(identifier) {
   showNotification('Chargement des fichiers...', 'info');
   try {
@@ -1448,24 +1539,29 @@ async function addAllFiles(identifier) {
     const meta = await res.json();
     const files = meta.files || [];
 
-    const skipFormats = ['Item Tile', 'Metadata', 'Thumbnail', 'JPEG Thumb', 'JSON', 'XML', 'ZIP'];
+    // === FILTRE MP3/OGG UNIQUEMENT ===
     const useful = files.filter(f => {
       if (!f.name) return false;
-      if (skipFormats.includes(f.format)) return false;
-      if (f.name.startsWith('__ia_thumb')) return false;
-      return true;
+      const fmt = (f.format || '').toLowerCase();
+      const nameLower = f.name.toLowerCase();
+      return fmt.includes('mp3') || fmt.includes('ogg') ||
+             nameLower.endsWith('.mp3') || nameLower.endsWith('.ogg');
     });
+
+    if (useful.length === 0) {
+      showNotification('Aucun MP3 ou OGG dans cet item', 'warning');
+      return;
+    }
 
     let added = 0;
     useful.forEach(f => {
       const url = 'https://archive.org/download/' + encodeURIComponent(identifier) + '/' + f.name.split('/').map(encodeURIComponent).join('/');
-      const type = getFileType(f.format);
-      addToPlaylist(url, f.name, type, identifier, parseInt(f.size) || 0);
+      addToPlaylist(url, f.name, 'audio', identifier, parseInt(f.size) || 0);
       added++;
     });
 
-    showNotification(added + ' fichier(s) ajouté(s)', 'success');
-    log(added + ' fichiers ajoutés depuis ' + identifier, 'found');
+    showNotification(added + ' fichier(s) MP3/OGG ajouté(s)', 'success');
+    log(added + ' fichiers MP3/OGG ajoutés depuis ' + identifier, 'found');
   } catch (e) {
     showNotification('Erreur : ' + e.message, 'error');
   }
@@ -1635,8 +1731,6 @@ $('clearPlaylistBtn').onclick = () => {
   currentMediaItem = null;
   const audio = $('html5Audio');
   if (audio) { audio.pause(); audio.src = ''; }
-  const video = $('videoPlayerContainer').querySelector('video');
-  if (video) { video.pause(); video.src = ''; }
   $('videoScreen').classList.add('active');
   $('audioScreen').classList.remove('active');
   $('videoPlaceholder').style.display = 'flex';
@@ -1659,16 +1753,8 @@ $('clearPlaylistBtn').onclick = () => {
 $('playPauseBtn').onclick = () => {
   const audio = $('html5Audio');
   if (currentMediaItem) {
-    if (currentMediaItem.type === 'audio') {
-      if (audio.paused) audio.play();
-      else audio.pause();
-    } else if (currentMediaItem.type === 'video') {
-      const video = $('videoPlayerContainer').querySelector('video');
-      if (video) {
-        if (video.paused) video.play();
-        else video.pause();
-      }
-    }
+    if (audio.paused) audio.play();
+    else audio.pause();
   }
 };
 
@@ -1687,11 +1773,15 @@ document.addEventListener('keydown', (e) => {
 
 window.addEventListener('beforeunload', () => zipManager.destroy());
 
+/* =========================================================
+   INIT — DÉMARRAGE À VIDE
+   ========================================================= */
 window.addEventListener('DOMContentLoaded', () => {
   loadPlaylistFromStorage();
   updateGlobalCount();
   showNotification('MEGA EXPLORER ARCHIVES prêt.', 'success');
-  setTimeout(() => searchArchive(true), 500);
+  log('Prêt. Tape un mot-clé et clique RECHERCHER.', 'info');
+  // ⚠️ Pas de recherche auto au démarrage
 });
 </script>
 </body>
