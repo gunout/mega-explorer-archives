@@ -369,90 +369,120 @@ body {
 .bar { width: 8px; background: var(--primary-cyan); animation: wave 1s infinite ease-in-out; }
 @keyframes wave { 0%, 100% { height: 10px; opacity: 0.5; } 50% { height: 60px; opacity: 1; box-shadow: 0 0 10px var(--primary-cyan); } }
 
-/* Contrôles discrets */
+/* =========================================================
+   CONTRÔLES CLASSIQUES + AUTO-MASQUAGE
+   ========================================================= */
 .media-controls {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 70%, transparent 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 70%, transparent 100%);
   padding: 30px 12px 10px 12px;
   display: flex; flex-direction: column; gap: 8px;
   z-index: 30;
-  opacity: 0.35;
-  transition: opacity 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: auto;
 }
-.screen-container:hover .media-controls,
-.media-controls.always-visible { opacity: 1; }
+
+.media-controls.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
 
 .progress-container {
-  width: 100%; height: 4px;
+  width: 100%; height: 5px;
   background: rgba(0, 255, 255, 0.15);
-  border-radius: 2px; cursor: pointer; position: relative;
+  border-radius: 3px; cursor: pointer; position: relative;
   transition: height 0.15s ease;
 }
-.progress-container:hover { height: 6px; }
+.progress-container:hover { height: 7px; }
 .progress-buffered {
   position: absolute; top: 0; left: 0; height: 100%;
-  background: rgba(0, 255, 255, 0.25); border-radius: 2px; pointer-events: none;
+  background: rgba(0, 255, 255, 0.25); border-radius: 3px; pointer-events: none;
 }
 .progress-played {
   position: absolute; top: 0; left: 0; height: 100%;
-  background: var(--primary-cyan); border-radius: 2px;
+  background: var(--primary-cyan); border-radius: 3px;
   box-shadow: 0 0 8px var(--primary-cyan); pointer-events: none; width: 0%;
 }
 .progress-thumb {
   position: absolute; top: 50%; transform: translate(-50%, -50%);
-  width: 12px; height: 12px; background: var(--primary-cyan);
+  width: 14px; height: 14px; background: var(--primary-cyan);
   border-radius: 50%; box-shadow: 0 0 10px var(--primary-cyan);
   pointer-events: none; opacity: 0; transition: opacity 0.2s; left: 0%;
 }
 .progress-container:hover .progress-thumb { opacity: 1; }
 
 .controls-row {
-  display: flex; align-items: center; gap: 10px;
-  color: var(--primary-cyan); font-family: 'Orbitron', monospace; font-size: 10px;
+  display: flex; align-items: center; gap: 8px;
+  color: var(--primary-cyan);
+  font-family: 'Orbitron', monospace; font-size: 11px;
+  flex-wrap: nowrap;
 }
 
 .ctrl-btn {
-  background: transparent; border: none;
-  color: var(--primary-cyan); cursor: pointer;
-  font-size: 13px; padding: 4px 6px; border-radius: 4px;
-  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
-  min-width: 24px; text-decoration: none;
+  background: rgba(0, 255, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: var(--primary-cyan);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  text-decoration: none;
+  flex-shrink: 0;
 }
 .ctrl-btn:hover {
-  background: rgba(0, 255, 255, 0.15); color: #fff;
-  text-shadow: 0 0 8px var(--primary-cyan);
+  background: rgba(0, 255, 255, 0.2);
+  border-color: var(--primary-cyan);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+.ctrl-btn:active {
+  transform: scale(0.95);
 }
 
 /* Boutons Play / Pause / Stop */
-.play-btn { color: var(--success-green) !important; }
+.play-btn { color: var(--success-green) !important; border-color: rgba(0, 255, 102, 0.4); }
 .play-btn:hover {
-  background: rgba(0, 255, 102, 0.15) !important;
-  text-shadow: 0 0 8px var(--success-green) !important;
+  background: rgba(0, 255, 102, 0.2) !important;
+  border-color: var(--success-green) !important;
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.5) !important;
 }
 
-.pause-btn { color: var(--warning-orange) !important; }
+.pause-btn { color: var(--warning-orange) !important; border-color: rgba(255, 153, 0, 0.4); }
 .pause-btn:hover {
-  background: rgba(255, 153, 0, 0.15) !important;
-  text-shadow: 0 0 8px var(--warning-orange) !important;
+  background: rgba(255, 153, 0, 0.2) !important;
+  border-color: var(--warning-orange) !important;
+  box-shadow: 0 0 10px rgba(255, 153, 0, 0.5) !important;
 }
 
-.stop-btn { color: var(--danger-red) !important; }
+.stop-btn { color: var(--danger-red) !important; border-color: rgba(255, 51, 51, 0.4); }
 .stop-btn:hover {
-  background: rgba(255, 51, 51, 0.15) !important;
-  text-shadow: 0 0 8px var(--danger-red) !important;
+  background: rgba(255, 51, 51, 0.2) !important;
+  border-color: var(--danger-red) !important;
+  box-shadow: 0 0 10px rgba(255, 51, 51, 0.5) !important;
 }
 
 .ctrl-btn:disabled {
-  opacity: 0.3;
+  opacity: 0.25;
   cursor: not-allowed;
   pointer-events: none;
+  background: transparent;
 }
 
 .time-display {
-  font-family: 'Orbitron', monospace; font-size: 10px;
-  color: var(--text-secondary); min-width: 80px;
+  font-family: 'Orbitron', monospace; font-size: 11px;
+  color: var(--text-secondary); min-width: 90px;
   letter-spacing: 0.5px; user-select: none;
+  padding: 0 4px;
 }
 .time-display .current { color: var(--primary-cyan); }
 .time-display .separator { opacity: 0.5; margin: 0 3px; }
@@ -466,29 +496,45 @@ body {
 }
 .volume-slider::-webkit-slider-thumb {
   -webkit-appearance: none; appearance: none;
-  width: 10px; height: 10px; background: var(--primary-cyan);
+  width: 12px; height: 12px; background: var(--primary-cyan);
   border-radius: 50%; cursor: pointer; box-shadow: 0 0 6px var(--primary-cyan);
 }
-.volume-wrapper:hover .volume-slider { width: 70px; opacity: 1; }
+.volume-slider::-moz-range-thumb {
+  width: 12px; height: 12px; background: var(--primary-cyan);
+  border-radius: 50%; cursor: pointer; border: none;
+  box-shadow: 0 0 6px var(--primary-cyan);
+}
+.volume-wrapper:hover .volume-slider { width: 80px; opacity: 1; }
 
 .speed-btn {
-  font-family: 'Orbitron', monospace; font-size: 9px;
-  padding: 3px 6px; border: 1px solid rgba(0, 255, 255, 0.4);
-  background: transparent; color: var(--text-secondary);
-  border-radius: 3px; cursor: pointer; transition: all 0.2s; min-width: 32px;
+  font-family: 'Orbitron', monospace; font-size: 10px;
+  padding: 4px 8px; border: 1px solid rgba(0, 255, 255, 0.3);
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--text-secondary);
+  border-radius: 6px; cursor: pointer;
+  transition: all 0.2s; min-width: 38px;
+  height: 34px;
 }
-.speed-btn:hover { border-color: var(--primary-cyan); color: var(--primary-cyan); }
+.speed-btn:hover {
+  border-color: var(--primary-cyan);
+  color: var(--primary-cyan);
+  background: rgba(0, 255, 255, 0.2);
+}
 
 .controls-spacer { flex: 1; }
-.download-current-btn { color: var(--success-green) !important; }
+
+.download-current-btn { color: var(--success-green) !important; border-color: rgba(0, 255, 102, 0.4) !important; }
 .download-current-btn:hover {
-  background: rgba(0, 255, 102, 0.15) !important;
-  text-shadow: 0 0 8px var(--success-green) !important;
+  background: rgba(0, 255, 102, 0.2) !important;
+  border-color: var(--success-green) !important;
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.5) !important;
 }
-.fullscreen-btn { color: var(--warning-orange) !important; }
+
+.fullscreen-btn { color: var(--warning-orange) !important; border-color: rgba(255, 153, 0, 0.4) !important; }
 .fullscreen-btn:hover {
-  background: rgba(255, 153, 0, 0.15) !important;
-  text-shadow: 0 0 8px var(--warning-orange) !important;
+  background: rgba(255, 153, 0, 0.2) !important;
+  border-color: var(--warning-orange) !important;
+  box-shadow: 0 0 10px rgba(255, 153, 0, 0.5) !important;
 }
 
 .control-bar {
@@ -565,6 +611,8 @@ body {
 }
 .side-panel::-webkit-scrollbar { width: 8px; }
 .side-panel::-webkit-scrollbar-thumb { background: var(--dark-cyan); border-radius: 4px; }
+
+@media (max-width: 1100px) { .layout { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -953,7 +1001,7 @@ function loadPlaylistFromStorage() {
 }
 
 /* =========================================================
-   LECTEUR MEDIA + CONTRÔLES
+   LECTEUR MEDIA + CONTRÔLES CLASSIQUES + AUTO-MASQUAGE
    ========================================================= */
 let currentMediaElement = null;
 
@@ -970,6 +1018,8 @@ function attachMediaControls(mediaEl) {
   const ctrlPlay = $('ctrlPlay');
   const ctrlPause = $('ctrlPause');
   const ctrlStop = $('ctrlStop');
+
+  let isDragging = false;
 
   // Reset
   progressPlayed.style.width = '0%';
@@ -1025,7 +1075,6 @@ function attachMediaControls(mediaEl) {
   });
 
   // SEEK
-  let isDragging = false;
   const seekFromEvent = (e) => {
     if (!mediaEl.duration) return;
     const rect = progressContainer.getBoundingClientRect();
@@ -1041,17 +1090,15 @@ function attachMediaControls(mediaEl) {
   document.addEventListener('mouseup', () => { isDragging = false; });
   document.addEventListener('touchend', () => { isDragging = false; });
 
-  // ===== BOUTONS PLAY / PAUSE / STOP =====
+  // BOUTONS PLAY / PAUSE / STOP
   ctrlPlay.onclick = () => {
     mediaEl.play().catch(() => {});
     updatePlayButtons();
   };
-
   ctrlPause.onclick = () => {
     mediaEl.pause();
     updatePlayButtons();
   };
-
   ctrlStop.onclick = () => {
     mediaEl.pause();
     mediaEl.currentTime = 0;
@@ -1062,13 +1109,8 @@ function attachMediaControls(mediaEl) {
     const status = $('statusIndicator');
     if (status) status.textContent = '⏹ STOPPED';
   };
-
-  $('ctrlBack10').onclick = () => {
-    mediaEl.currentTime = Math.max(0, mediaEl.currentTime - 10);
-  };
-  $('ctrlForward10').onclick = () => {
-    mediaEl.currentTime = Math.min(mediaEl.duration || 0, mediaEl.currentTime + 10);
-  };
+  $('ctrlBack10').onclick = () => { mediaEl.currentTime = Math.max(0, mediaEl.currentTime - 10); };
+  $('ctrlForward10').onclick = () => { mediaEl.currentTime = Math.min(mediaEl.duration || 0, mediaEl.currentTime + 10); };
 
   // Volume
   volumeSlider.oninput = (e) => {
@@ -1106,10 +1148,38 @@ function attachMediaControls(mediaEl) {
     });
   };
 
+  // ===== AUTO-MASQUAGE APRÈS 2 SECONDES =====
   const mediaControls = $('mediaControls');
-  mediaControls.classList.add('always-visible');
-  setTimeout(() => mediaControls.classList.remove('always-visible'), 2000);
+  const screenContainer = $('screenContainer');
+  let hideTimeout = null;
 
+  function showControls() {
+    mediaControls.classList.remove('hidden');
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+      if (!mediaControls.matches(':hover') && !isDragging && !mediaEl.paused) {
+        mediaControls.classList.add('hidden');
+      }
+    }, 2000);
+  }
+
+  function keepControlsVisible() {
+    showControls();
+  }
+
+  screenContainer.addEventListener('mousemove', keepControlsVisible);
+  screenContainer.addEventListener('mouseenter', keepControlsVisible);
+  screenContainer.addEventListener('touchstart', keepControlsVisible);
+  mediaControls.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+  mediaControls.addEventListener('mouseleave', showControls);
+
+  mediaEl.addEventListener('play', showControls);
+  mediaEl.addEventListener('pause', () => {
+    mediaControls.classList.remove('hidden');
+    clearTimeout(hideTimeout);
+  });
+
+  showControls();
   updatePlayButtons();
 }
 
@@ -1164,9 +1234,7 @@ function playMedia(index) {
   }
 }
 
-/* =========================================================
-   ARCHIVE.ORG SEARCH
-   ========================================================= */
+/* ARCHIVE.ORG SEARCH */
 let currentType = 'all';
 let currentQuery = '';
 let currentPage = 1;
