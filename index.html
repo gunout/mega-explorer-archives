@@ -370,14 +370,14 @@ body {
 @keyframes wave { 0%, 100% { height: 10px; opacity: 0.5; } 50% { height: 60px; opacity: 1; box-shadow: 0 0 10px var(--primary-cyan); } }
 
 /* =========================================================
-   CONTRÔLES COMPACTS
+   CONTRÔLES VISIBLES ET COMPACTS (WRAP ACTIVÉ)
    ========================================================= */
 .media-controls {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 70%, transparent 100%);
-  padding: 20px 8px 6px 8px;
-  display: flex; flex-direction: column; gap: 4px;
+  padding: 22px 8px 8px 8px;
+  display: flex; flex-direction: column; gap: 5px;
   z-index: 30;
   opacity: 1;
   transform: translateY(0);
@@ -419,20 +419,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 6px;
   color: var(--primary-cyan);
   font-family: 'Orbitron', monospace;
   font-size: 10px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   width: 100%;
-  max-width: 540px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 2px;
-}
-
-.controls-spacer {
-  width: 8px;
-  flex-shrink: 0;
+  padding: 0 4px;
+  row-gap: 6px;
 }
 
 .ctrl-btn {
@@ -440,14 +436,15 @@ body {
   border: 1px solid rgba(0, 255, 255, 0.3);
   color: var(--primary-cyan);
   cursor: pointer;
-  font-size: 12px;
-  padding: 4px 6px;
+  font-size: 13px;
+  padding: 5px 7px;
   border-radius: 5px;
   transition: all 0.2s;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px; height: 28px;
+  width: 30px;
+  height: 30px;
   text-decoration: none;
   flex-shrink: 0;
 }
@@ -489,10 +486,13 @@ body {
 }
 
 .time-display {
-  font-family: 'Orbitron', monospace; font-size: 10px;
-  color: var(--text-secondary); min-width: 78px;
-  letter-spacing: 0.3px; user-select: none;
-  padding: 0 2px;
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  color: var(--text-secondary);
+  min-width: 72px;
+  letter-spacing: 0.3px;
+  user-select: none;
+  padding: 0 3px;
   text-align: center;
 }
 .time-display .current { color: var(--primary-cyan); }
@@ -502,16 +502,16 @@ body {
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 0 4px;
+  padding: 0 5px;
   background: rgba(0, 255, 255, 0.05);
   border: 1px solid rgba(0, 255, 255, 0.2);
   border-radius: 6px;
-  height: 28px;
+  height: 30px;
   flex-shrink: 0;
 }
 
 .volume-slider {
-  width: 50px;
+  width: 55px;
   height: 4px;
   background: rgba(0, 255, 255, 0.2);
   border-radius: 2px;
@@ -559,18 +559,26 @@ body {
 }
 
 .speed-btn {
-  font-family: 'Orbitron', monospace; font-size: 9px;
-  padding: 3px 6px; border: 1px solid rgba(0, 255, 255, 0.3);
+  font-family: 'Orbitron', monospace;
+  font-size: 9px;
+  padding: 4px 7px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
   background: rgba(0, 255, 255, 0.08);
   color: var(--text-secondary);
-  border-radius: 5px; cursor: pointer;
-  transition: all 0.2s; min-width: 32px;
-  height: 28px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 34px;
+  height: 30px;
 }
 .speed-btn:hover {
   border-color: var(--primary-cyan);
   color: var(--primary-cyan);
   background: rgba(0, 255, 255, 0.2);
+}
+
+.controls-spacer {
+  display: none;
 }
 
 .download-current-btn { color: var(--success-green) !important; border-color: rgba(0, 255, 102, 0.4) !important; }
@@ -666,29 +674,31 @@ body {
   .controls-row {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 4px;
+    gap: 5px;
+    row-gap: 5px;
     max-width: 100%;
   }
   .volume-slider {
-    width: 40px;
+    width: 45px;
   }
   .ctrl-btn {
-    width: 26px;
-    height: 26px;
-    font-size: 11px;
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
   }
   .time-display {
     font-size: 9px;
-    min-width: 70px;
+    min-width: 68px;
   }
   .speed-btn {
-    height: 26px;
-    font-size: 8px;
-    padding: 2px 5px;
-    min-width: 28px;
+    height: 28px;
+    font-size: 9px;
+    padding: 3px 6px;
+    min-width: 30px;
   }
   .volume-wrapper {
-    height: 26px;
+    height: 28px;
+    padding: 0 4px;
   }
 }
 </style>
@@ -815,8 +825,6 @@ body {
               </div>
 
               <button class="speed-btn" id="ctrlSpeed" title="Vitesse">1x</button>
-
-              <div class="controls-spacer"></div>
 
               <a class="ctrl-btn download-current-btn" id="ctrlDownload" title="Télécharger" download>
                 <i class="fas fa-download"></i>
@@ -973,9 +981,6 @@ let selectedUids = new Set();
 let currentIndex = -1;
 let currentMediaItem = null;
 
-/* =========================================================
-   AJOUT À LA PLAYLIST (FILTRE MP3/OGG STRICT)
-   ========================================================= */
 function addToPlaylist(url, name, type, path = '', size = 0) {
   const nameLower = (name || '').toLowerCase();
   const urlLower = (url || '').toLowerCase();
@@ -992,9 +997,7 @@ function addToPlaylist(url, name, type, path = '', size = 0) {
 
   type = 'audio';
 
-  if (playlist.some(item => item.url === url)) {
-    return;
-  }
+  if (playlist.some(item => item.url === url)) return;
 
   const uid = Date.now().toString(36) + Math.random().toString(36).slice(2);
   playlist.push({ url, name, type, path, size, uid });
@@ -1101,9 +1104,6 @@ function loadPlaylistFromStorage() {
   } catch (e) {}
 }
 
-/* =========================================================
-   LECTEUR MEDIA + CONTRÔLES COMPACTS
-   ========================================================= */
 let currentMediaElement = null;
 
 function attachMediaControls(mediaEl) {
@@ -1259,9 +1259,7 @@ function attachMediaControls(mediaEl) {
     }, 2000);
   }
 
-  function keepControlsVisible() {
-    showControls();
-  }
+  function keepControlsVisible() { showControls(); }
 
   screenContainer.addEventListener('mousemove', keepControlsVisible);
   screenContainer.addEventListener('mouseenter', keepControlsVisible);
@@ -1310,9 +1308,6 @@ function playMedia(index) {
   attachMediaControls(audio);
 }
 
-/* =========================================================
-   ARCHIVE.ORG SEARCH
-   ========================================================= */
 let currentType = 'all';
 let currentQuery = '';
 let currentPage = 1;
@@ -1565,7 +1560,6 @@ function log(text, cls = '') {
   logEl.scrollTop = logEl.scrollHeight;
 }
 
-/* ZIP Worker */
 const workerScript = `
 importScripts('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');
 let zip = null;
@@ -1684,7 +1678,6 @@ class ZipManager {
 
 const zipManager = new ZipManager();
 
-/* ÉVÉNEMENTS */
 $('searchArchiveBtn').onclick = () => searchArchive(true);
 $('archiveInput').addEventListener('keydown', e => {
   if (e.key === 'Enter') searchArchive(true);
