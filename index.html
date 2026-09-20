@@ -12,7 +12,7 @@
                connect-src *;
                media-src * blob:;
                frame-src https://archive.org;">
-<title>MEGA ARCHIVE.ORG — Explorateur & Téléchargeur</title>
+<title>MEGA EXPLORER ARCHIVES</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -36,7 +36,6 @@
   --warning-orange: #ff9900;
   --purple: #ff00ff;
   --glow-cyan: 0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.4);
-  --glow-strong: 0 0 15px var(--neon-blue), 0 0 30px var(--primary-cyan);
 }
 
 body {
@@ -142,7 +141,7 @@ body {
   width: 100%;
 }
 .action-btn.download-zip-btn { background: linear-gradient(45deg, var(--primary-cyan), var(--accent-blue)); box-shadow: var(--glow-cyan); }
-.action-btn.download-zip-btn:hover { transform: translateY(-2px); box-shadow: var(--glow-strong); }
+.action-btn.download-zip-btn:hover { transform: translateY(-2px); }
 .action-btn.test-download-btn { background: linear-gradient(45deg, var(--warning-orange), #ff6600); }
 .action-btn.test-download-btn:hover { transform: translateY(-2px); }
 
@@ -161,7 +160,6 @@ body {
 .playlist-container::-webkit-scrollbar { width: 8px; }
 .playlist-container::-webkit-scrollbar-track { background: rgba(0, 20, 40, 0.6); }
 .playlist-container::-webkit-scrollbar-thumb { background: var(--dark-cyan); border-radius: 4px; }
-.playlist-container::-webkit-scrollbar-thumb:hover { background: var(--primary-cyan); }
 
 .playlist-item {
   background: rgba(0,255,255, 0.03);
@@ -356,9 +354,8 @@ body {
 }
 .placeholder i { font-size: 50px; margin-bottom: 15px; opacity: 0.3; }
 
-.video-player-container, .yt-player-container { width: 100%; height: 100%; position: relative; z-index: 10; }
+.video-player-container { width: 100%; height: 100%; position: relative; z-index: 10; }
 .video-player-container video { width: 100%; height: 100%; background: #000; }
-.yt-player-container iframe { width: 100%; height: 100%; border: none; }
 
 .audio-player-ui {
   width: 100%; padding: 20px; text-align: center; color: var(--primary-cyan);
@@ -372,180 +369,122 @@ body {
 .bar { width: 8px; background: var(--primary-cyan); animation: wave 1s infinite ease-in-out; }
 @keyframes wave { 0%, 100% { height: 10px; opacity: 0.5; } 50% { height: 60px; opacity: 1; box-shadow: 0 0 10px var(--primary-cyan); } }
 
-/* =========================================================
-   CONTRÔLES DISCRETS DU LECTEUR
-   ========================================================= */
+/* Contrôles discrets */
 .media-controls {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 70%, transparent 100%);
   padding: 30px 12px 10px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: flex; flex-direction: column; gap: 8px;
   z-index: 30;
   opacity: 0.35;
   transition: opacity 0.3s ease;
-  pointer-events: auto;
 }
 .screen-container:hover .media-controls,
-.media-controls.always-visible {
-  opacity: 1;
-}
+.media-controls.always-visible { opacity: 1; }
 
 .progress-container {
-  width: 100%;
-  height: 4px;
+  width: 100%; height: 4px;
   background: rgba(0, 255, 255, 0.15);
-  border-radius: 2px;
-  cursor: pointer;
-  position: relative;
+  border-radius: 2px; cursor: pointer; position: relative;
   transition: height 0.15s ease;
 }
-.progress-container:hover {
-  height: 6px;
-}
+.progress-container:hover { height: 6px; }
 .progress-buffered {
-  position: absolute;
-  top: 0; left: 0;
-  height: 100%;
-  background: rgba(0, 255, 255, 0.25);
-  border-radius: 2px;
-  pointer-events: none;
+  position: absolute; top: 0; left: 0; height: 100%;
+  background: rgba(0, 255, 255, 0.25); border-radius: 2px; pointer-events: none;
 }
 .progress-played {
-  position: absolute;
-  top: 0; left: 0;
-  height: 100%;
-  background: var(--primary-cyan);
-  border-radius: 2px;
-  box-shadow: 0 0 8px var(--primary-cyan);
-  pointer-events: none;
-  width: 0%;
+  position: absolute; top: 0; left: 0; height: 100%;
+  background: var(--primary-cyan); border-radius: 2px;
+  box-shadow: 0 0 8px var(--primary-cyan); pointer-events: none; width: 0%;
 }
 .progress-thumb {
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 12px; height: 12px;
-  background: var(--primary-cyan);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--primary-cyan);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s;
-  left: 0%;
+  position: absolute; top: 50%; transform: translate(-50%, -50%);
+  width: 12px; height: 12px; background: var(--primary-cyan);
+  border-radius: 50%; box-shadow: 0 0 10px var(--primary-cyan);
+  pointer-events: none; opacity: 0; transition: opacity 0.2s; left: 0%;
 }
-.progress-container:hover .progress-thumb {
-  opacity: 1;
-}
+.progress-container:hover .progress-thumb { opacity: 1; }
 
 .controls-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--primary-cyan);
-  font-family: 'Orbitron', monospace;
-  font-size: 10px;
+  display: flex; align-items: center; gap: 10px;
+  color: var(--primary-cyan); font-family: 'Orbitron', monospace; font-size: 10px;
 }
 
 .ctrl-btn {
-  background: transparent;
-  border: none;
-  color: var(--primary-cyan);
-  cursor: pointer;
-  font-size: 13px;
-  padding: 4px 6px;
-  border-radius: 4px;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 24px;
-  text-decoration: none;
+  background: transparent; border: none;
+  color: var(--primary-cyan); cursor: pointer;
+  font-size: 13px; padding: 4px 6px; border-radius: 4px;
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  min-width: 24px; text-decoration: none;
 }
 .ctrl-btn:hover {
-  background: rgba(0, 255, 255, 0.15);
-  color: #fff;
+  background: rgba(0, 255, 255, 0.15); color: #fff;
   text-shadow: 0 0 8px var(--primary-cyan);
 }
 
+/* Boutons Play / Pause / Stop */
+.play-btn { color: var(--success-green) !important; }
+.play-btn:hover {
+  background: rgba(0, 255, 102, 0.15) !important;
+  text-shadow: 0 0 8px var(--success-green) !important;
+}
+
+.pause-btn { color: var(--warning-orange) !important; }
+.pause-btn:hover {
+  background: rgba(255, 153, 0, 0.15) !important;
+  text-shadow: 0 0 8px var(--warning-orange) !important;
+}
+
+.stop-btn { color: var(--danger-red) !important; }
+.stop-btn:hover {
+  background: rgba(255, 51, 51, 0.15) !important;
+  text-shadow: 0 0 8px var(--danger-red) !important;
+}
+
+.ctrl-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .time-display {
-  font-family: 'Orbitron', monospace;
-  font-size: 10px;
-  color: var(--text-secondary);
-  min-width: 80px;
-  letter-spacing: 0.5px;
-  user-select: none;
+  font-family: 'Orbitron', monospace; font-size: 10px;
+  color: var(--text-secondary); min-width: 80px;
+  letter-spacing: 0.5px; user-select: none;
 }
 .time-display .current { color: var(--primary-cyan); }
 .time-display .separator { opacity: 0.5; margin: 0 3px; }
 
-.volume-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  position: relative;
-}
+.volume-wrapper { display: flex; align-items: center; gap: 5px; position: relative; }
 .volume-slider {
-  width: 0;
-  opacity: 0;
-  transition: all 0.3s ease;
-  -webkit-appearance: none;
-  appearance: none;
-  height: 4px;
-  background: rgba(0, 255, 255, 0.2);
-  border-radius: 2px;
-  outline: none;
-  cursor: pointer;
+  width: 0; opacity: 0; transition: all 0.3s ease;
+  -webkit-appearance: none; appearance: none;
+  height: 4px; background: rgba(0, 255, 255, 0.2);
+  border-radius: 2px; outline: none; cursor: pointer;
 }
 .volume-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 10px; height: 10px;
-  background: var(--primary-cyan);
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 6px var(--primary-cyan);
+  -webkit-appearance: none; appearance: none;
+  width: 10px; height: 10px; background: var(--primary-cyan);
+  border-radius: 50%; cursor: pointer; box-shadow: 0 0 6px var(--primary-cyan);
 }
-.volume-slider::-moz-range-thumb {
-  width: 10px; height: 10px;
-  background: var(--primary-cyan);
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 0 6px var(--primary-cyan);
-}
-.volume-wrapper:hover .volume-slider {
-  width: 70px;
-  opacity: 1;
-}
+.volume-wrapper:hover .volume-slider { width: 70px; opacity: 1; }
 
 .speed-btn {
-  font-family: 'Orbitron', monospace;
-  font-size: 9px;
-  padding: 3px 6px;
-  border: 1px solid rgba(0, 255, 255, 0.4);
-  background: transparent;
-  color: var(--text-secondary);
-  border-radius: 3px;
-  cursor: pointer;
-  transition: all 0.2s;
-  min-width: 32px;
+  font-family: 'Orbitron', monospace; font-size: 9px;
+  padding: 3px 6px; border: 1px solid rgba(0, 255, 255, 0.4);
+  background: transparent; color: var(--text-secondary);
+  border-radius: 3px; cursor: pointer; transition: all 0.2s; min-width: 32px;
 }
-.speed-btn:hover {
-  border-color: var(--primary-cyan);
-  color: var(--primary-cyan);
-}
+.speed-btn:hover { border-color: var(--primary-cyan); color: var(--primary-cyan); }
 
 .controls-spacer { flex: 1; }
-
 .download-current-btn { color: var(--success-green) !important; }
 .download-current-btn:hover {
   background: rgba(0, 255, 102, 0.15) !important;
   text-shadow: 0 0 8px var(--success-green) !important;
 }
-
 .fullscreen-btn { color: var(--warning-orange) !important; }
 .fullscreen-btn:hover {
   background: rgba(255, 153, 0, 0.15) !important;
@@ -569,13 +508,11 @@ body {
 .icon-btn:hover { color: #fff; text-shadow: 0 0 10px var(--primary-cyan); transform: scale(1.1); }
 
 .scan-log {
-  background: #000;
-  color: var(--primary-cyan);
+  background: #000; color: var(--primary-cyan);
   font-family: monospace; font-size: 10px;
   padding: 8px; border: 1px solid var(--dark-cyan);
   border-radius: 4px; height: 150px;
-  overflow-y: auto; margin-top: 8px;
-  text-align: left;
+  overflow-y: auto; margin-top: 8px; text-align: left;
 }
 .scan-log .found { color: var(--purple); font-weight: bold; }
 .scan-log .error { color: var(--danger-red); }
@@ -613,8 +550,7 @@ body {
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
   display: flex; align-items: center; gap: 8px;
   font-family: 'Orbitron', monospace; font-size: 11px;
-  animation: slideIn 0.3s;
-  max-width: 350px;
+  animation: slideIn 0.3s; max-width: 350px;
 }
 .toast.success { border-color: var(--success-green); color: var(--success-green); }
 .toast.error { border-color: var(--danger-red); color: var(--danger-red); }
@@ -638,7 +574,7 @@ body {
 
 <div class="dashboard">
   <header class="header">
-    <div class="logo">🏛 MEGA <span style="color:var(--purple)">ARCHIVE.ORG</span></div>
+    <div class="logo">🏛 MEGA <span style="color:var(--purple)">EXPLORER ARCHIVES</span></div>
     <div class="status-bar">
       <div class="status-item"><div class="status-dot"></div> ONLINE</div>
       <div class="status-item"><div class="status-dot" style="background:var(--success-green)"></div> READY</div>
@@ -647,7 +583,6 @@ body {
   </header>
 
   <div class="layout">
-    <!-- COLONNE GAUCHE : RECHERCHE + RÉSULTATS -->
     <section class="panel">
       <div class="panel-title">
         <span><i class="fas fa-search"></i> EXPLORATEUR ARCHIVE.ORG</span>
@@ -689,7 +624,6 @@ body {
       <div class="scan-log" id="scanLog">> Prêt. Tape un mot-clé et clique RECHERCHER.</div>
     </section>
 
-    <!-- COLONNE DROITE : LECTEUR + PLAYLIST -->
     <aside class="side-panel">
       <section class="panel media-deck">
         <div class="panel-title"><i class="fas fa-play-circle"></i> LECTEUR</div>
@@ -718,7 +652,6 @@ body {
             </div>
           </div>
 
-          <!-- CONTRÔLES DISCRETS (superposés en bas) -->
           <div class="media-controls" id="mediaControls">
             <div class="progress-container" id="progressContainer">
               <div class="progress-buffered" id="progressBuffered"></div>
@@ -727,8 +660,14 @@ body {
             </div>
 
             <div class="controls-row">
-              <button class="ctrl-btn" id="ctrlPlayPause" title="Lecture/Pause (Espace)">
+              <button class="ctrl-btn play-btn" id="ctrlPlay" title="Lecture">
                 <i class="fas fa-play"></i>
+              </button>
+              <button class="ctrl-btn pause-btn" id="ctrlPause" title="Pause">
+                <i class="fas fa-pause"></i>
+              </button>
+              <button class="ctrl-btn stop-btn" id="ctrlStop" title="Stop (retour au début)">
+                <i class="fas fa-stop"></i>
               </button>
               <button class="ctrl-btn" id="ctrlBack10" title="Reculer 10s">
                 <i class="fas fa-rotate-left"></i>
@@ -777,7 +716,6 @@ body {
         </div>
       </section>
 
-      <!-- SECTION PLAYLIST AGRANDIE + BOUTON CLEAR -->
       <section class="panel" style="flex: 1; min-height: 400px;">
         <div class="panel-title">
           <span><i class="fas fa-list-music"></i> PLAYLIST <span id="playlistCountBadge" style="color:var(--success-green); font-size:11px;">(0)</span></span>
@@ -834,9 +772,6 @@ body {
 
 const $ = id => document.getElementById(id);
 
-/* =========================================================
-   UTILS
-   ========================================================= */
 function showNotification(message, type = 'info') {
   const container = $('toastContainer');
   const toast = document.createElement('div');
@@ -844,8 +779,7 @@ function showNotification(message, type = 'info') {
   const icon = document.createElement('i');
   icon.className = 'fas ' + (
     type === 'success' ? 'fa-check-circle' :
-    type === 'error' ? 'fa-exclamation-triangle' :
-    'fa-warning'
+    type === 'error' ? 'fa-exclamation-triangle' : 'fa-warning'
   );
   const span = document.createElement('span');
   span.textContent = String(message);
@@ -900,9 +834,6 @@ function formatTime(sec) {
   return m + ':' + String(r).padStart(2, '0');
 }
 
-/* =========================================================
-   PARTICLES
-   ========================================================= */
 const cyberBg = $('cyberBg');
 for (let i = 0; i < 30; i++) {
   const p = document.createElement('div');
@@ -912,9 +843,6 @@ for (let i = 0; i < 30; i++) {
   cyberBg.appendChild(p);
 }
 
-/* =========================================================
-   PLAYLIST
-   ========================================================= */
 let playlist = [];
 let selectedUids = new Set();
 let currentIndex = -1;
@@ -936,7 +864,6 @@ function renderPlaylist() {
   const container = $('playlistContainer');
   if (!container) return;
 
-  // Badge compteur
   const playlistCountBadge = $('playlistCountBadge');
   if (playlistCountBadge) playlistCountBadge.textContent = '(' + playlist.length + ')';
 
@@ -1011,14 +938,12 @@ function deleteTrack(uid) {
 }
 
 function savePlaylist() {
-  try {
-    localStorage.setItem('megaarchive_playlist', JSON.stringify(playlist));
-  } catch (e) {}
+  try { localStorage.setItem('megaexplorer_playlist', JSON.stringify(playlist)); } catch (e) {}
 }
 
 function loadPlaylistFromStorage() {
   try {
-    const saved = JSON.parse(localStorage.getItem('megaarchive_playlist') || '[]');
+    const saved = JSON.parse(localStorage.getItem('megaexplorer_playlist') || '[]');
     if (Array.isArray(saved) && saved.length) {
       playlist = saved.filter(i => i && i.url && i.name && i.uid);
       renderPlaylist();
@@ -1028,7 +953,7 @@ function loadPlaylistFromStorage() {
 }
 
 /* =========================================================
-   LECTEUR MEDIA + CONTRÔLES DISCRETS
+   LECTEUR MEDIA + CONTRÔLES
    ========================================================= */
 let currentMediaElement = null;
 
@@ -1042,14 +967,15 @@ function attachMediaControls(mediaEl) {
   const timeTotal = $('timeTotal');
   const volumeSlider = $('volumeSlider');
   const volumeIcon = $('volumeIcon');
-  const ctrlPlayPause = $('ctrlPlayPause');
+  const ctrlPlay = $('ctrlPlay');
+  const ctrlPause = $('ctrlPause');
+  const ctrlStop = $('ctrlStop');
 
   // Reset
   progressPlayed.style.width = '0%';
   progressThumb.style.left = '0%';
   timeCurrent.textContent = '0:00';
   timeTotal.textContent = '0:00';
-  ctrlPlayPause.innerHTML = '<i class="fas fa-pause"></i>';
 
   const updateProgress = () => {
     if (!mediaEl.duration) return;
@@ -1065,7 +991,6 @@ function attachMediaControls(mediaEl) {
     progressBuffered.style.width = (end / mediaEl.duration * 100) + '%';
   };
 
-  // Cleanup listeners précédents
   if (mediaEl._listeners) {
     mediaEl._listeners.forEach(({ ev, fn }) => mediaEl.removeEventListener(ev, fn));
   }
@@ -1076,21 +1001,31 @@ function attachMediaControls(mediaEl) {
     mediaEl._listeners.push({ ev, fn });
   };
 
+  function updatePlayButtons() {
+    if (mediaEl.paused) {
+      ctrlPlay.disabled = false;
+      ctrlPause.disabled = true;
+    } else {
+      ctrlPlay.disabled = true;
+      ctrlPause.disabled = false;
+    }
+  }
+
   addL('timeupdate', updateProgress);
   addL('loadedmetadata', () => {
     timeTotal.textContent = formatTime(mediaEl.duration);
     volumeSlider.value = mediaEl.volume;
   });
   addL('progress', updateBuffered);
-  addL('play', () => { ctrlPlayPause.innerHTML = '<i class="fas fa-pause"></i>'; });
-  addL('pause', () => { ctrlPlayPause.innerHTML = '<i class="fas fa-play"></i>'; });
+  addL('play', () => { updatePlayButtons(); });
+  addL('pause', () => { updatePlayButtons(); });
   addL('ended', () => {
+    updatePlayButtons();
     if (playlist.length > 1) playMedia((currentIndex + 1) % playlist.length);
   });
 
-  // ===== SEEK =====
+  // SEEK
   let isDragging = false;
-
   const seekFromEvent = (e) => {
     if (!mediaEl.duration) return;
     const rect = progressContainer.getBoundingClientRect();
@@ -1099,7 +1034,6 @@ function attachMediaControls(mediaEl) {
     mediaEl.currentTime = pct * mediaEl.duration;
     updateProgress();
   };
-
   progressContainer.addEventListener('mousedown', (e) => { isDragging = true; seekFromEvent(e); });
   progressContainer.addEventListener('touchstart', (e) => { isDragging = true; seekFromEvent(e); });
   document.addEventListener('mousemove', (e) => { if (isDragging) seekFromEvent(e); });
@@ -1107,10 +1041,26 @@ function attachMediaControls(mediaEl) {
   document.addEventListener('mouseup', () => { isDragging = false; });
   document.addEventListener('touchend', () => { isDragging = false; });
 
-  // ===== BOUTONS =====
-  ctrlPlayPause.onclick = () => {
-    if (mediaEl.paused) mediaEl.play();
-    else mediaEl.pause();
+  // ===== BOUTONS PLAY / PAUSE / STOP =====
+  ctrlPlay.onclick = () => {
+    mediaEl.play().catch(() => {});
+    updatePlayButtons();
+  };
+
+  ctrlPause.onclick = () => {
+    mediaEl.pause();
+    updatePlayButtons();
+  };
+
+  ctrlStop.onclick = () => {
+    mediaEl.pause();
+    mediaEl.currentTime = 0;
+    updatePlayButtons();
+    progressPlayed.style.width = '0%';
+    progressThumb.style.left = '0%';
+    timeCurrent.textContent = '0:00';
+    const status = $('statusIndicator');
+    if (status) status.textContent = '⏹ STOPPED';
   };
 
   $('ctrlBack10').onclick = () => {
@@ -1129,7 +1079,6 @@ function attachMediaControls(mediaEl) {
     mediaEl.muted = !mediaEl.muted;
     updateVolumeIcon();
   };
-
   function updateVolumeIcon() {
     let icon = 'fa-volume-high';
     if (mediaEl.muted || mediaEl.volume === 0) icon = 'fa-volume-xmark';
@@ -1147,25 +1096,21 @@ function attachMediaControls(mediaEl) {
     $('ctrlSpeed').textContent = speeds[speedIdx] + 'x';
   };
 
-  // Download
   $('ctrlDownload').href = mediaEl.src;
 
-  // Fullscreen
   $('ctrlFullscreen').onclick = () => {
     const container = $('screenContainer');
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else {
-      container.requestFullscreen().catch(() => {
-        showNotification('Plein écran non supporté', 'warning');
-      });
-    }
+    if (document.fullscreenElement) document.exitFullscreen();
+    else container.requestFullscreen().catch(() => {
+      showNotification('Plein écran non supporté', 'warning');
+    });
   };
 
-  // Afficher les contrôles au démarrage
   const mediaControls = $('mediaControls');
   mediaControls.classList.add('always-visible');
   setTimeout(() => mediaControls.classList.remove('always-visible'), 2000);
+
+  updatePlayButtons();
 }
 
 function playMedia(index) {
@@ -1200,7 +1145,6 @@ function playMedia(index) {
   } else if (currentMediaItem.type === 'audio') {
     videoScreen.classList.remove('active');
     audioScreen.classList.add('active');
-
     let audio = $('html5Audio');
     if (!audio) {
       audio = document.createElement('audio');
@@ -1239,10 +1183,7 @@ document.querySelectorAll('.archive-type-btn').forEach(btn => {
 
 async function searchArchive(reset = true) {
   const query = $('archiveInput').value.trim();
-  if (!query) {
-    showNotification('Tape un mot-clé', 'warning');
-    return;
-  }
+  if (!query) { showNotification('Tape un mot-clé', 'warning'); return; }
 
   if (reset) {
     currentQuery = query;
@@ -1274,14 +1215,10 @@ async function searchArchive(reset = true) {
     }
 
     docs.forEach(doc => renderArchiveItem(doc));
-
     $('resultCount').textContent = Math.min(currentPage * 20, totalResults) + ' / ' + totalResults + ' résultat(s)';
 
-    if (currentPage * 20 < totalResults) {
-      $('loadMoreBtn').style.display = 'flex';
-    } else {
-      $('loadMoreBtn').style.display = 'none';
-    }
+    if (currentPage * 20 < totalResults) $('loadMoreBtn').style.display = 'flex';
+    else $('loadMoreBtn').style.display = 'none';
 
     log(docs.length + ' item(s) chargé(s)', 'found');
   } catch (e) {
@@ -1295,7 +1232,6 @@ async function searchArchive(reset = true) {
 
 function renderArchiveItem(doc) {
   const container = $('archiveResults');
-
   const item = document.createElement('div');
   item.className = 'archive-item';
 
@@ -1358,10 +1294,7 @@ function renderArchiveItem(doc) {
 
 async function toggleFiles(itemEl, identifier) {
   const list = itemEl.querySelector('.archive-files-list');
-  if (list.classList.contains('open')) {
-    list.classList.remove('open');
-    return;
-  }
+  if (list.classList.contains('open')) { list.classList.remove('open'); return; }
   list.classList.add('open');
 
   if (list.dataset.loaded === '1') return;
@@ -1372,7 +1305,6 @@ async function toggleFiles(itemEl, identifier) {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const meta = await res.json();
     const files = meta.files || [];
-
     list.innerHTML = '';
 
     if (files.length === 0) {
@@ -1482,9 +1414,7 @@ function log(text, cls = '') {
   logEl.scrollTop = logEl.scrollHeight;
 }
 
-/* =========================================================
-   ZIP WORKER
-   ========================================================= */
+/* ZIP Worker */
 const workerScript = `
 importScripts('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');
 let zip = null;
@@ -1550,7 +1480,6 @@ class ZipManager {
     this.isBusy = false;
     this.currentUrl = null;
   }
-
   handleMessage(e) {
     const d = e.data || {};
     if (d.type === 'progress') {
@@ -1561,7 +1490,7 @@ class ZipManager {
       if (this.currentUrl) URL.revokeObjectURL(this.currentUrl);
       this.currentUrl = URL.createObjectURL(d.blob);
       const sizeMB = (d.blob.size / (1024 * 1024)).toFixed(2);
-      $('zipStatusText').innerHTML = '✅ SUCCESS! Archive: <strong>' + sizeMB + ' MB</strong> (' + d.success + ' ok, ' + d.failed + ' échecs)';
+      $('zipStatusText').innerHTML = '✅ SUCCESS! Archive: <strong>' + sizeMB + ' MB</strong>';
       const btn = $('manualDlBtn');
       btn.style.display = 'block';
       btn.onclick = () => {
@@ -1571,7 +1500,6 @@ class ZipManager {
         document.body.appendChild(link);
         link.click();
         setTimeout(() => document.body.removeChild(link), 100);
-        showNotification('Téléchargement...', 'success');
       };
       setTimeout(() => btn.click(), 500);
       $('cancelZipBtn').style.display = 'none';
@@ -1582,7 +1510,6 @@ class ZipManager {
       this.cleanup();
     }
   }
-
   start(files, isTest) {
     if (this.isBusy) return;
     const items = isTest ? files.slice(0, 10) : files;
@@ -1595,7 +1522,6 @@ class ZipManager {
     $('closeZipBtn').style.display = 'none';
     this.worker.postMessage({ action: 'start', payload: { files: clean } });
   }
-
   cancel() { if (this.worker) this.worker.postMessage({ action: 'cancel' }); }
   cleanup() { this.isBusy = false; $('zipOverlay').classList.remove('active'); }
   destroy() {
@@ -1607,17 +1533,12 @@ class ZipManager {
 
 const zipManager = new ZipManager();
 
-/* =========================================================
-   ÉVÉNEMENTS
-   ========================================================= */
+/* ÉVÉNEMENTS */
 $('searchArchiveBtn').onclick = () => searchArchive(true);
 $('archiveInput').addEventListener('keydown', e => {
   if (e.key === 'Enter') searchArchive(true);
 });
-$('loadMoreBtn').onclick = () => {
-  currentPage++;
-  searchArchive(false);
-};
+$('loadMoreBtn').onclick = () => { currentPage++; searchArchive(false); };
 
 $('downloadZipBtn').onclick = () => {
   const items = playlist.filter(i => selectedUids.has(i.uid));
@@ -1632,34 +1553,22 @@ $('testDownloadBtn').onclick = () => {
 };
 
 $('selectAllBtn').onclick = () => {
-  if (selectedUids.size === playlist.length && playlist.length > 0) {
-    selectedUids.clear();
-  } else {
-    playlist.forEach(i => selectedUids.add(i.uid));
-  }
+  if (selectedUids.size === playlist.length && playlist.length > 0) selectedUids.clear();
+  else playlist.forEach(i => selectedUids.add(i.uid));
   renderPlaylist();
 };
 
-/* BOUTON CLEAR PLAYLIST */
 $('clearPlaylistBtn').onclick = () => {
-  if (playlist.length === 0) {
-    showNotification('Playlist déjà vide', 'info');
-    return;
-  }
+  if (playlist.length === 0) { showNotification('Playlist déjà vide', 'info'); return; }
   if (!confirm('Vider toute la playlist (' + playlist.length + ' fichier(s)) ?')) return;
-
   playlist = [];
   selectedUids.clear();
   currentIndex = -1;
   currentMediaItem = null;
-
-  // Arrêter la lecture en cours
   const audio = $('html5Audio');
   if (audio) { audio.pause(); audio.src = ''; }
   const video = $('videoPlayerContainer').querySelector('video');
   if (video) { video.pause(); video.src = ''; }
-
-  // Reset de l'écran
   $('videoScreen').classList.add('active');
   $('audioScreen').classList.remove('active');
   $('videoPlaceholder').style.display = 'flex';
@@ -1668,13 +1577,10 @@ $('clearPlaylistBtn').onclick = () => {
   $('audioTitle').textContent = 'NO TRACK';
   $('audioPath').textContent = 'WAITING...';
   $('statusIndicator').textContent = '⚡ READY';
-
-  // Reset des contrôles
   $('progressPlayed').style.width = '0%';
   $('progressThumb').style.left = '0%';
   $('timeCurrent').textContent = '0:00';
   $('timeTotal').textContent = '0:00';
-
   renderPlaylist();
   updateGlobalCount();
   savePlaylist();
@@ -1713,13 +1619,10 @@ document.addEventListener('keydown', (e) => {
 
 window.addEventListener('beforeunload', () => zipManager.destroy());
 
-/* =========================================================
-   INIT
-   ========================================================= */
 window.addEventListener('DOMContentLoaded', () => {
   loadPlaylistFromStorage();
   updateGlobalCount();
-  showNotification('MEGA ARCHIVE.ORG prêt. Tape un mot-clé !', 'success');
+  showNotification('MEGA EXPLORER ARCHIVES prêt.', 'success');
   setTimeout(() => searchArchive(true), 500);
 });
 </script>
